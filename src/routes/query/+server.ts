@@ -1,10 +1,10 @@
 import { GraphQL } from '$lib/graphql';
-import type { Data } from '$lib/stores';
+import type { RequestData } from '$lib/stores';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request }) => {
-	const data: WithRequiredProperty<Data, 'url'> = await request.json();
+	const data: RequestData = await request.json();
 
 	const { url, cache } = data;
 
