@@ -1,9 +1,11 @@
 import type { Data } from './stores';
 
-export const request = async (endpoint: string, data: { url: string; cache: Data['cache'] }) => {
+export const request = async (endpoint: string, data: Data) => {
+	const { current: url, cache } = data;
+
 	const response = await fetch(endpoint, {
 		method: 'POST',
-		body: JSON.stringify(data)
+		body: JSON.stringify({ url, cache })
 	});
 
 	const { data: __type } = await response.json();
