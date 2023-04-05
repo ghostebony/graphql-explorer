@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type {
-		InputField as SchemaInputField,
+		InputValue as SchemaInputValue,
 		Type as SchemaType,
-		__Type as Schema__Type
+		FullType as SchemaFullType
 	} from '$lib/graphql/queries/schema';
 	import type { InputField as TypeInputField, Type as TypeType } from '$lib/graphql/queries/type';
 	import Description from './Description.svelte';
@@ -17,8 +17,8 @@
 	export let type:
 		| SchemaType
 		| TypeType
-		| Schema__Type
-		| SchemaInputField['type']
+		| SchemaFullType
+		| SchemaInputValue['type']
 		| TypeInputField['type']
 		| undefined;
 </script>
@@ -45,6 +45,8 @@
 			<EnumValues enumValues={type.enumValues} />
 		{/if}
 
-		<OfType ofType={type.ofType} />
+		{#if 'ofType' in type}
+			<OfType ofType={type.ofType} />
+		{/if}
 	</Fieldset>
 {/if}
